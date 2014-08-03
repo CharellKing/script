@@ -1,20 +1,20 @@
-root="/home/ck/TimePass"
+#TimePass's project root
+root="/home/ck/TimePass/"
 cd ${root}/src/shm
-source=`find . -name "*.cpp" -o -name "*.h"`
 
-for path in ${source[@]}
+
+#TimePass's source relative path
+paths=("src/shm" "src/global")
+for path in ${paths[@]}
 do
-    cpplint ${path}
+    sources=`find "${root}${path}" -name "*.cpp" -o -name "*.h"`
+    for source in ${sources[@]}
+    do
+        cpplint ${source}
+    done
 done
 
-cd ${root}/src/global
-source=`find . -name "*.cpp" -o -name "*.h"`
-
-for path in ${source[@]}
-do
-    cpplint ${path}
-done
-
+#example's main.cpp
 cd ${root}/example
 source=`find . -name "main.cpp"`
 for path in ${source[@]}
